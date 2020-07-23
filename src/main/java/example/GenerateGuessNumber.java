@@ -2,5 +2,7 @@ package example;
 
 public interface GenerateGuessNumber {
 
-    String generate();
+    String generateNumber();
+
+    String generateNumbers();
 }

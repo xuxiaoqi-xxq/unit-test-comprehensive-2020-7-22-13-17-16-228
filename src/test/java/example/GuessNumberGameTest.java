@@ -97,7 +97,7 @@ public class GuessNumberGameTest {
     void should_return_true_when_validate_input_guess_number_given_1234() {
         //given
         GenerateGuessNumber generateGuessNumber = Mockito.mock(GenerateGuessNumber.class);
-        when(generateGuessNumber.generate()).thenReturn("1234");
+        when(generateGuessNumber.generateNumber()).thenReturn("1234");
 
         GenerateAnswer generateAnswer = Mockito.mock(GenerateAnswer.class);
         given(generateAnswer.generate()).willReturn("1234");
@@ -105,7 +105,7 @@ public class GuessNumberGameTest {
         GuessNumberGame guessNumberGame = new GuessNumberGame(generateAnswer.generate());
 
         //when
-        boolean isGuessNumberValid = guessNumberGame.isGuessNumberValid(generateGuessNumber.generate());
+        boolean isGuessNumberValid = guessNumberGame.isGuessNumberValid(generateGuessNumber.generateNumber());
 
         //then
         assertEquals(true, isGuessNumberValid);
@@ -115,7 +115,7 @@ public class GuessNumberGameTest {
     void should_return_false_when_validate_input_guess_number_given_1134() {
         //given
         GenerateGuessNumber generateGuessNumber = Mockito.mock(GenerateGuessNumber.class);
-        when(generateGuessNumber.generate()).thenReturn("1134");
+        when(generateGuessNumber.generateNumber()).thenReturn("1134");
 
         GenerateAnswer generateAnswer = Mockito.mock(GenerateAnswer.class);
         given(generateAnswer.generate()).willReturn("1234");
@@ -123,7 +123,7 @@ public class GuessNumberGameTest {
         GuessNumberGame guessNumberGame = new GuessNumberGame(generateAnswer.generate());
 
         //when
-        boolean isGuessNumberValid = guessNumberGame.isGuessNumberValid(generateGuessNumber.generate());
+        boolean isGuessNumberValid = guessNumberGame.isGuessNumberValid(generateGuessNumber.generateNumber());
 
         //then
         assertEquals(false, isGuessNumberValid);
@@ -133,7 +133,7 @@ public class GuessNumberGameTest {
     void should_return_false_when_validate_input_guess_number_given_14() {
         //given
         GenerateGuessNumber generateGuessNumber = Mockito.mock(GenerateGuessNumber.class);
-        when(generateGuessNumber.generate()).thenReturn("14");
+        when(generateGuessNumber.generateNumber()).thenReturn("14");
 
         GenerateAnswer generateAnswer = Mockito.mock(GenerateAnswer.class);
         given(generateAnswer.generate()).willReturn("1234");
@@ -141,7 +141,7 @@ public class GuessNumberGameTest {
         GuessNumberGame guessNumberGame = new GuessNumberGame(generateAnswer.generate());
 
         //when
-        boolean isGuessNumberValid = guessNumberGame.isGuessNumberValid(generateGuessNumber.generate());
+        boolean isGuessNumberValid = guessNumberGame.isGuessNumberValid(generateGuessNumber.generateNumber());
 
         //then
         assertEquals(false, isGuessNumberValid);
