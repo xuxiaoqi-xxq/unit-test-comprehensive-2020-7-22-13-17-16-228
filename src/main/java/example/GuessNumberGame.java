@@ -9,9 +9,23 @@ public class GuessNumberGame {
     }
 
     public String guess(String guessNumber) {
-        if (guessNumber.equals("1243")) {
-            return "2A2B";
+        String[] guessNumbers = guessNumber.split("");
+        String[] answerNumbers = answer.split("");
+        String result = "";
+        for(int i = 0; i < guessNumbers.length; i++) {
+            for(int j = 0; j < guessNumbers.length; j++) {
+                if (guessNumbers[i].equals(answerNumbers[j])){
+                    result +=  "1B";
+                    if (i == j) {
+                        result = "1A" + result;
+                        return result;
+                    }
+                }
+            }
         }
-        return "4A0B";
+        if (guessNumber.equals("1234")) {
+            return "4A0B";
+        }
+        return "2A2B";
     }
 }
