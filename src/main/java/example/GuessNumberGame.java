@@ -30,4 +30,8 @@ public class GuessNumberGame {
         }
         return String.format("%dA%dB", rightNumberAndPosition, rightNumber);
     }
+
+    public boolean isGuessNumberValid(String generate) {
+        return false;
+    }
 }
