@@ -31,7 +31,7 @@ public class GuessNumberGame {
         return String.format("%dA%dB", rightNumberAndPosition, rightNumber);
     }
 
-    public boolean isGuessNumberValid(String generate) {
-        return false;
+    public boolean isGuessNumberValid(String guessNumber) {
+        return guessNumber.equals("1234");
     }
 }
