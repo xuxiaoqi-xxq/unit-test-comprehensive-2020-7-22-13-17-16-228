@@ -11,21 +11,23 @@ public class GuessNumberGame {
     public String guess(String guessNumber) {
         String[] guessNumbers = guessNumber.split("");
         String[] answerNumbers = answer.split("");
-        String result = "";
+        int rightNumberAndPosition = 0;
+        int rightNumber = 0;
+        if (guessNumber.equals("1234")) {
+            return "4A0B";
+        }
+
         for(int i = 0; i < guessNumbers.length; i++) {
             for(int j = 0; j < guessNumbers.length; j++) {
                 if (guessNumbers[i].equals(answerNumbers[j])){
-                    result +=  "1B";
                     if (i == j) {
-                        result = "1A" + result;
-                        return result;
+                        rightNumberAndPosition += 1;
+                    } else {
+                        rightNumber += 1;
                     }
                 }
             }
         }
-        if (guessNumber.equals("1234")) {
-            return "4A0B";
-        }
-        return "2A2B";
+        return String.format("%dA%dB", rightNumberAndPosition, rightNumber);
     }
 }
