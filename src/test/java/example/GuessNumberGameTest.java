@@ -36,4 +36,18 @@ public class GuessNumberGameTest {
         //then
         assertEquals("2A2B", guessResult);
     }
+
+    @Test
+    void should_return_1A1B_when_answer_is_1234_given_1563() {
+        //given
+        GenerateAnswer generateAnswer = Mockito.mock(GenerateAnswer.class);
+        given(generateAnswer.generate()).willReturn("1234");
+        GuessNumberGame guessNumberGame = new GuessNumberGame(generateAnswer.generate());
+
+        //when
+        String guessResult = guessNumberGame.guess("1563");
+
+        //then
+        assertEquals("1A1B", guessResult);
+    }
 }
