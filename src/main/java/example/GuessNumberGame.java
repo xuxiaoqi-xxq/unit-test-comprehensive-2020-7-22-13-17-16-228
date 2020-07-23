@@ -1,5 +1,7 @@
 package example;
 
+import jdk.internal.joptsimple.internal.Strings;
+
 public class GuessNumberGame {
 
     private String answer;
@@ -32,11 +34,14 @@ public class GuessNumberGame {
     }
 
     public boolean isGuessNumberValid(String guessNumber) {
-        boolean isGuessNumberUnique = false;
-        for(int i = 0; i < guessNumber.length(); i++) {
-            for(int j = i + 1; j < guessNumber.length(); j++) {
-                if (guessNumber.charAt(i) == guessNumber.charAt(j)) {
-                    return false;
+        if (guessNumber.length() != 4) {
+            return false;
+        } else {
+            for(int i = 0; i < guessNumber.length(); i++) {
+                for(int j = i + 1; j < guessNumber.length(); j++) {
+                    if (guessNumber.charAt(i) == guessNumber.charAt(j)) {
+                        return false;
+                    }
                 }
             }
         }

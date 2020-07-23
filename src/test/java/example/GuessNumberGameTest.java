@@ -88,7 +88,7 @@ public class GuessNumberGameTest {
     }
 
     @Test
-    void should_return_false_when_validate_input_guess_number_given_114() {
+    void should_return_false_when_validate_input_guess_number_given_14() {
         //given
         GenerateGuessNumber generateGuessNumber = Mockito.mock(GenerateGuessNumber.class);
         when(generateGuessNumber.generate()).thenReturn("14");
