@@ -32,6 +32,6 @@ public class GuessNumberGame {
     }
 
     public boolean isGuessNumberValid(String guessNumber) {
-        return guessNumber.equals("1234");
+        return true;
     }
 }
