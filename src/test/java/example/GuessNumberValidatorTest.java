@@ -27,7 +27,7 @@ public class GuessNumberValidatorTest {
     void should_return_false_when_validate_input_guess_number_given_11() {
         //given
         GenerateGuessNumber generateGuessNumber = Mockito.mock(GenerateGuessNumber.class);
-        when(generateGuessNumber.generateNumber()).thenReturn("1234");
+        when(generateGuessNumber.generateNumber()).thenReturn("11");
 
         GuessNumberValidator guessNumberValidator = new GuessNumberValidator();
 
