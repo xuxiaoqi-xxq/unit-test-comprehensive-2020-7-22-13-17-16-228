@@ -52,4 +52,19 @@ public class GuessNumberValidatorTest {
         //then
         assertEquals(false, isGuessNumberValid);
     }
+
+    @Test
+    void should_return_false_when_validate_input_guess_number_given_a123() {
+        //given
+        GenerateGuessNumber generateGuessNumber = Mockito.mock(GenerateGuessNumber.class);
+        when(generateGuessNumber.generateNumber()).thenReturn("a123");
+
+        GuessNumberValidator guessNumberValidator = new GuessNumberValidator();
+
+        //when
+        boolean isGuessNumberValid = guessNumberValidator.isValid(generateGuessNumber.generateNumber());
+
+        //then
+        assertEquals(false, isGuessNumberValid);
+    }
 }
