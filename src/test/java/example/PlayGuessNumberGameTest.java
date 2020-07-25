@@ -9,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 public class PlayGuessNumberGameTest {
 
@@ -20,6 +21,8 @@ public class PlayGuessNumberGameTest {
 
     private PlayGuessNumberGame playGuessNumberGame;
 
+    private GuessNumberValidator guessNumberValidator;
+
     @BeforeEach
     void prepare() {
         guessOutputContent = new ByteArrayOutputStream();
@@ -27,6 +30,8 @@ public class PlayGuessNumberGameTest {
         System.setOut(guessOutputFromConsole);
 
         playGuessNumberGame = new PlayGuessNumberGame();
+
+        guessNumberValidator = Mockito.mock(GuessNumberValidator.class);
     }
 
     @Test
@@ -38,6 +43,7 @@ public class PlayGuessNumberGameTest {
         for (int i = 0; i < guessNumbers.length; i++) {
             guessInputFromConsole = new ByteArrayInputStream(guessNumbers[i].getBytes());
             System.setIn(guessInputFromConsole);
+            when(guessNumberValidator.isValid(guessNumbers[i])).thenReturn(true);
 
             //when
             playGuessNumberGame.play();
