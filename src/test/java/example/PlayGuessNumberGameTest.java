@@ -4,12 +4,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PlayGuessNumberGameTest {
@@ -29,7 +30,7 @@ public class PlayGuessNumberGameTest {
     private static GuessNumberGame guessNumberGame;
 
     @BeforeAll
-    static void prepare() {
+    static void prepare() throws Exception {
         guessOutputContent = new ByteArrayOutputStream();
         guessOutputFromConsole = new PrintStream(guessOutputContent);
         System.setOut(guessOutputFromConsole);
@@ -42,6 +43,9 @@ public class PlayGuessNumberGameTest {
         when(generateAnswer.generate()).thenReturn("1234");
 
         guessNumberGame = Mockito.mock(GuessNumberGame.class);
+        Field guessNumberGameField = playGuessNumberGame.getClass().getDeclaredField("guessNumberGame");
+        guessNumberGameField.setAccessible(true);
+        guessNumberGameField.set(playGuessNumberGame, guessNumberGame);
     }
 
     @Test
@@ -51,16 +55,18 @@ public class PlayGuessNumberGameTest {
         String[] guessResults = new String[]{"1A1B", "2A2B", "4A0B"};
 
         for (int i = 0; i < guessNumbers.length; i++) {
-            guessInputFromConsole = new ByteArrayInputStream(guessNumbers[i].getBytes());
-            System.setIn(guessInputFromConsole);
             when(validator.isValid(guessNumbers[i])).thenReturn(true);
             when(guessNumberGame.guess(guessNumbers[i])).thenReturn(guessResults[i]);
+
+            guessInputFromConsole = new ByteArrayInputStream(guessNumbers[i].getBytes());
+            System.setIn(guessInputFromConsole);
 
             //when
             playGuessNumberGame.play();
 
             //then
             assertEquals(guessResults[i], guessOutputContent.toString());
+            guessOutputContent.reset();
         }
     }
 }
