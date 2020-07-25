@@ -1,32 +1,49 @@
 package example;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Arrays;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 public class PlayGuessNumberGameTest {
 
+    private ByteArrayInputStream guessInputFromConsole;
+
+    private PrintStream guessOutputFromConsole;
+
+    private ByteArrayOutputStream guessOutputContent;
+
+    private PlayGuessNumberGame playGuessNumberGame;
+
+    @BeforeEach
+    void prepare() {
+        guessOutputContent = new ByteArrayOutputStream();
+        guessOutputFromConsole = new PrintStream(guessOutputContent);
+        System.setOut(guessOutputFromConsole);
+
+        playGuessNumberGame = new PlayGuessNumberGame();
+    }
+
     @Test
-    void should_return_guess_result_when_answer_is_1234_given_three_numbers() {
+    void should_win_when_answer_is_1234_given_three_valid_numbers() {
         //given
-        PlayGuessNumberGame playGuessNumberGame = new PlayGuessNumberGame();
         String[] guessNumbers = new String[]{"1647", "1324", "1234"};
-        StringBuilder guessResult = new StringBuilder();
+        String[] guessResults = new String[]{"1A1B", "2A2B", "4A0B"};
 
-        //when
         for (int i = 0; i < guessNumbers.length; i++) {
-            InputStream byteArrayInputStream = new ByteArrayInputStream(guessNumbers[i].getBytes());
-            guessResult.append(playGuessNumberGame.play() + " ");
-        }
-        guessResult.delete(guessResult.length() - 1, guessResult.length());
+            guessInputFromConsole = new ByteArrayInputStream(guessNumbers[i].getBytes());
+            System.setIn(guessInputFromConsole);
 
-        //then
-        assertEquals("1A1B 2A2B 4A0B", guessResult.toString());
+            //when
+            playGuessNumberGame.play();
+
+            //then
+            assertEquals(guessResults[i], guessOutputContent.toString());
+        }
     }
 }
