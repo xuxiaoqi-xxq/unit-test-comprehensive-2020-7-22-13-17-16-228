@@ -2,7 +2,7 @@ package example;
 
 public class PlayGuessNumberGame {
 
-    public String play(String[] guessNumbers) {
+    public String play() {
         return null;
     }
 }
