@@ -30,19 +30,4 @@ public class GuessNumberGame {
         }
         return String.format("%dA%dB", rightNumberAndPosition, rightNumber);
     }
-
-    public boolean isGuessNumberValid(String guessNumber) {
-        if (guessNumber.length() != 4) {
-            return false;
-        } else {
-            for (int i = 0; i < guessNumber.length(); i++) {
-                for (int j = i + 1; j < guessNumber.length(); j++) {
-                    if (guessNumber.charAt(i) == guessNumber.charAt(j)) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
 }
