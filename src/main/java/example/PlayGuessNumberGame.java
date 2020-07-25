@@ -26,7 +26,7 @@ public class PlayGuessNumberGame {
             if (guessNumberValidator.isValid(guessNumber)) {
                 System.out.print(guessNumberGame.guess(guessNumber));
             } else {
-                System.out.print("wrong input");
+                System.out.print("wrong input, input again");
             }
         } catch (IOException e) {
             e.printStackTrace();
