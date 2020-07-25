@@ -4,13 +4,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 public class PlayGuessNumberGameTest {
@@ -52,72 +52,80 @@ public class PlayGuessNumberGameTest {
     @Test
     void should_win_when_answer_is_1234_given_three_valid_numbers() {
         //given
-        String[] guessNumbers = new String[]{"1647", "1324", "1234"};
-        String[] guessResults = new String[]{"1A1B", "2A2B", "4A0B"};
+        String guessNumber = "1647\n1324\n1234\n";
+        String guessResult = "1A1B\n2A2B\n4A0B\n";
 
-        for (int i = 0; i < guessNumbers.length; i++) {
-            when(validator.isValid(guessNumbers[i])).thenReturn(true);
-            when(guessNumberGame.guess(guessNumbers[i])).thenReturn(guessResults[i]);
+        when(validator.isValid(any())).thenReturn(true);
+        when(guessNumberGame.guess(any())).thenReturn("1A1B", "2A2B", "4A0B");
 
-            guessInputFromConsole = new ByteArrayInputStream(guessNumbers[i].getBytes());
-            System.setIn(guessInputFromConsole);
+        guessInputFromConsole = new ByteArrayInputStream(guessNumber.getBytes());
+        System.setIn(guessInputFromConsole);
 
-            //when
-            playGuessNumberGame.play();
+        //when
+        playGuessNumberGame.play();
 
-            //then
-            assertEquals(guessResults[i], guessOutputContent.toString());
-            guessOutputContent.reset();
-        }
+        //then
+        assertEquals(guessResult, guessOutputContent.toString());
+        guessOutputContent.reset();
     }
 
     @Test
     void should_win_when_answer_is_1234_given_11_and_two_valid_numbers() {
         //given
-        String[] guessNumbers = new String[]{"11", "1324", "1234"};
-        String[] guessResults = new String[]{"wrong input", "2A2B", "4A0B"};
+        String guessNumber = "11\n1324\n1234\n";
+        String guessResult = "wrong input, input again\n2A2B\n4A0B\n";
 
-        for (int i = 0; i < guessNumbers.length; i++) {
-            if (guessNumbers[i].equals("11")) {
-                when(validator.isValid(guessNumbers[i])).thenReturn(false);
-            } else {
-                when(validator.isValid(guessNumbers[i])).thenReturn(true);
-            }
-            when(guessNumberGame.guess(guessNumbers[i])).thenReturn(guessResults[i]);
-            guessInputFromConsole = new ByteArrayInputStream(guessNumbers[i].getBytes());
-            System.setIn(guessInputFromConsole);
+        when(validator.isValid(any())).thenReturn(false, true, true);
+        when(guessNumberGame.guess(any())).thenReturn("2A2B", "4A0B");
 
-            //when
-            playGuessNumberGame.play();
+        guessInputFromConsole = new ByteArrayInputStream(guessNumber.getBytes());
+        System.setIn(guessInputFromConsole);
 
-            //then
-            assertEquals(guessResults[i], guessOutputContent.toString());
-            guessOutputContent.reset();
-        }
+        //when
+        playGuessNumberGame.play();
+
+        //then
+        assertEquals(guessResult, guessOutputContent.toString());
+        guessOutputContent.reset();
     }
 
     @Test
     void should_end_game_after_6_times_when_answer_is_1234_given_7_valid_numbers() {
         //given
-        String[] guessNumbers = new String[]{"1093", "1093", "1093", "1093", "1093", "1324", "1234"};
-        String[] guessResults = new String[]{"1A1B", "1A1B", "1A1B", "1A1B", "1A1B", "2A2B", "4A0B"};
+        String guessNumber = "1093\n1093\n1093\n1093\n1093\n1324\n1234\n";
+        String guessResult = "1A1B\n1A1B\n1A1B\n1A1B\n1A1B\n2A2B\n";
 
-        for (int i = 0; i < guessNumbers.length; i++) {
-            if (guessNumbers[i].equals("11")) {
-                when(validator.isValid(guessNumbers[i])).thenReturn(false);
-            } else {
-                when(validator.isValid(guessNumbers[i])).thenReturn(true);
-            }
-            when(guessNumberGame.guess(guessNumbers[i])).thenReturn(guessResults[i]);
-            guessInputFromConsole = new ByteArrayInputStream(guessNumbers[i].getBytes());
-            System.setIn(guessInputFromConsole);
+        when(validator.isValid(any())).thenReturn(true);
+        when(guessNumberGame.guess(any())).thenReturn("1A1B", "1A1B", "1A1B", "1A1B", "1A1B", "2A2B", "4A0B");
 
-            //when
-            playGuessNumberGame.play();
+        guessInputFromConsole = new ByteArrayInputStream(guessNumber.getBytes());
+        System.setIn(guessInputFromConsole);
 
-            //then
-            assertEquals(guessResults[i], guessOutputContent.toString());
-            guessOutputContent.reset();
-        }
+        //when
+        playGuessNumberGame.play();
+
+        //then
+        assertEquals(guessResult, guessOutputContent.toString());
+        guessOutputContent.reset();
+    }
+
+    @Test
+    void should_lose_after_6_times_when_answer_is_1234_given_6_valid_numbers() {
+        //given
+        String guessNumber = "1093\n1093\n1093\n1093\n1093\n1324\n";
+        String guessResult = "1A1B\n1A1B\n1A1B\n1A1B\n1A1B\n2A2B\n";
+
+        when(validator.isValid(any())).thenReturn(true);
+        when(guessNumberGame.guess(any())).thenReturn("1A1B", "1A1B", "1A1B", "1A1B", "1A1B", "2A2B");
+
+        guessInputFromConsole = new ByteArrayInputStream(guessNumber.getBytes());
+        System.setIn(guessInputFromConsole);
+
+        //when
+        playGuessNumberGame.play();
+
+        //then
+        assertEquals(guessResult, guessOutputContent.toString());
+        guessOutputContent.reset();
     }
 }
