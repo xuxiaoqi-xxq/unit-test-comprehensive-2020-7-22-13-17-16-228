@@ -10,21 +10,15 @@ public class GuessNumberGame {
 
     public String guess(String guessNumber) {
         String[] guessNumbers = guessNumber.split("");
-        String[] answerNumbers = answer.split("");
         int rightNumberAndPosition = 0;
         int rightNumber = 0;
-        if (guessNumber.equals("1234")) {
-            return "4A0B";
-        }
 
         for (int i = 0; i < guessNumbers.length; i++) {
-            for (int j = 0; j < guessNumbers.length; j++) {
-                if (guessNumbers[i].equals(answerNumbers[j])) {
-                    if (i == j) {
-                        rightNumberAndPosition += 1;
-                    } else {
-                        rightNumber += 1;
-                    }
+            if(answer.contains(guessNumbers[i])){
+                rightNumber ++;
+                if (String.valueOf(answer.charAt(i)).equals(guessNumbers[i])) {
+                    rightNumber --;
+                    rightNumberAndPosition ++;
                 }
             }
         }
