@@ -11,7 +11,7 @@ public class GuessNumberAnswerGenerator implements AnswerGenerator {
         while (answer.size() < 4) {
             Integer ans = (int) (Math.random() * 10);
             if (!answer.contains(ans)) {
-                stringBuilder.append(String.valueOf(ans));
+                stringBuilder.append(ans);
             }
             answer.add(ans);
         }
