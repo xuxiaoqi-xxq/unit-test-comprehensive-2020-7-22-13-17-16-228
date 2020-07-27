@@ -1,5 +1,5 @@
 package example;
 
-public interface GenerateAnswer {
+public interface AnswerGenerator {
     String generate();
 }

@@ -25,7 +25,7 @@ public class PlayGuessNumberGameTest {
 
     private static Validator validator;
 
-    private static GenerateAnswer generateAnswer;
+    private static AnswerGenerator answerGenerator;
 
     private static GuessNumberGame guessNumberGame;
 
@@ -39,8 +39,8 @@ public class PlayGuessNumberGameTest {
 
         validator = Mockito.mock(Validator.class);
 
-        generateAnswer = Mockito.mock(GenerateAnswer.class);
-        when(generateAnswer.generate()).thenReturn("1234");
+        answerGenerator = Mockito.mock(AnswerGenerator.class);
+        when(answerGenerator.generate()).thenReturn("1234");
 
         guessNumberGame = Mockito.mock(GuessNumberGame.class);
         // mock

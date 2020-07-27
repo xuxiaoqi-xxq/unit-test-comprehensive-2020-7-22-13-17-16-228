@@ -10,12 +10,12 @@ public class PlayGuessNumberGame {
 
     private GuessNumberGame guessNumberGame;
 
-    private GenerateAnswerImpl generateAnswer;
+    private GuessNumberAnswerGenerator generateAnswer;
 
     public PlayGuessNumberGame() {
 
         guessNumberValidator = new GuessNumberValidator();
-        generateAnswer = new GenerateAnswerImpl();
+        generateAnswer = new GuessNumberAnswerGenerator();
         guessNumberGame = new GuessNumberGame(generateAnswer.generate());
     }
 

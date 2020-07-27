@@ -9,15 +9,15 @@ import static org.mockito.Mockito.when;
 
 public class GuessNumberGameTest {
 
-    private static GenerateAnswer generateAnswer;
+    private static AnswerGenerator answerGenerator;
 
     private static GuessNumberGame guessNumberGame;
 
     @BeforeAll
     static void prepare() {
-        generateAnswer = Mockito.mock(GenerateAnswer.class);
-        when(generateAnswer.generate()).thenReturn("1234");
-        guessNumberGame = new GuessNumberGame(generateAnswer.generate());
+        answerGenerator = Mockito.mock(AnswerGenerator.class);
+        when(answerGenerator.generate()).thenReturn("1234");
+        guessNumberGame = new GuessNumberGame(answerGenerator.generate());
     }
 
     @Test

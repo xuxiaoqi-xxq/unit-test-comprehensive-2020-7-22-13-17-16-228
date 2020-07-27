@@ -3,7 +3,7 @@ package example;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GenerateAnswerImpl implements GenerateAnswer {
+public class GuessNumberAnswerGenerator implements AnswerGenerator {
     @Override
     public String generate() {
         Set<Integer> answer = new HashSet<>();
