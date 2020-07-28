@@ -13,10 +13,10 @@ public class GuessNumberGame {
         int rightNumberAndPosition = 0;
         int rightNumber = 0;
 
-        for (int i = 0; i < guessNumbers.length; i++) {
-            if(answer.contains(guessNumbers[i])){
+        for (int index = 0; index < guessNumbers.length; index++) {
+            if(answer.contains(guessNumbers[index])){
                 rightNumber ++;
-                if (String.valueOf(answer.charAt(i)).equals(guessNumbers[i])) {
+                if (String.valueOf(answer.charAt(index)).equals(guessNumbers[index])) {
                     rightNumber --;
                     rightNumberAndPosition ++;
                 }
