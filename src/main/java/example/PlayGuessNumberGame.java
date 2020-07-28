@@ -39,6 +39,7 @@ public class PlayGuessNumberGame {
                     break;
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

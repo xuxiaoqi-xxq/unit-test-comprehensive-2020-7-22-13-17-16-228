@@ -12,7 +12,7 @@ public class GuessNumberAnswerGenerator implements AnswerGenerator {
         StringBuilder answer = new StringBuilder();
         while (answer.length() < MAX_LENGTH) {
             String generateAnswer = String.valueOf((int) (Math.random() * 10));
-            if (answer.indexOf(generateAnswer) != -1) {
+            if (answer.indexOf(generateAnswer) == -1) {
                 answer.append(generateAnswer);
             }
         }

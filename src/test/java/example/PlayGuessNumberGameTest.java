@@ -17,33 +17,29 @@ public class PlayGuessNumberGameTest {
 
     private static ByteArrayInputStream guessInputFromConsole;
 
-    private static PrintStream guessOutputFromConsole;
-
     private static ByteArrayOutputStream guessOutputContent;
 
     private static PlayGuessNumberGame playGuessNumberGame;
 
     private static Validator validator;
 
-    private static AnswerGenerator answerGenerator;
-
     private static GuessNumberGame guessNumberGame;
 
     @BeforeAll
     static void prepare() throws Exception {
         guessOutputContent = new ByteArrayOutputStream();
-        guessOutputFromConsole = new PrintStream(guessOutputContent);
+        PrintStream guessOutputFromConsole = new PrintStream(guessOutputContent);
         System.setOut(guessOutputFromConsole);
 
         playGuessNumberGame = new PlayGuessNumberGame();
 
         validator = Mockito.mock(Validator.class);
 
-        answerGenerator = Mockito.mock(AnswerGenerator.class);
+        AnswerGenerator answerGenerator = Mockito.mock(AnswerGenerator.class);
         when(answerGenerator.generate()).thenReturn("1234");
 
         guessNumberGame = Mockito.mock(GuessNumberGame.class);
-        //todo
+        // mock
         Field guessNumberGameField = playGuessNumberGame.getClass().getDeclaredField("guessNumberGame");
         guessNumberGameField.setAccessible(true);
         guessNumberGameField.set(playGuessNumberGame, guessNumberGame);
