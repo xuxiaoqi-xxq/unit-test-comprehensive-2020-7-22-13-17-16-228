@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 
 public class PlayGuessNumberGame {
 
+    public static final int MAX_PLAY_TIMES = 6;
+    public static final String WRONG_INPUT_MSG = "wrong input, input again";
+    public static final String RIGHT_GUESS_RESULT = "4A0B";
     private final GuessNumberValidator guessNumberValidator;
 
     private final GuessNumberGame guessNumberGame;
@@ -24,17 +27,15 @@ public class PlayGuessNumberGame {
             String guessResult;
             String guessNumber;
             //todo
-            while (playTimes++ < 6 && (guessNumber = guessNumberReader.readLine()) != null) {
+            while (playTimes++ < MAX_PLAY_TIMES && (guessNumber = guessNumberReader.readLine()) != null) {
                 if (guessNumberValidator.isValid(guessNumber)) {
                     guessResult = guessNumberGame.guess(guessNumber);
                 } else {
-                    //todo
-                    guessResult = "wrong input, input again";
+                    guessResult = WRONG_INPUT_MSG;
                 }
-                //todo
                 System.out.print(guessResult + "\n");
                 //todo
-                if (guessResult.equals("4A0B")) {
+                if (guessResult.equals(RIGHT_GUESS_RESULT)) {
                     break;
                 }
             }
