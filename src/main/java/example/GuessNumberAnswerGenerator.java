@@ -6,14 +6,16 @@ import java.util.Set;
 public class GuessNumberAnswerGenerator implements AnswerGenerator {
     @Override
     public String generate() {
-        Set<Integer> answer = new HashSet<>();
+        Set<Integer> answers = new HashSet<>();
+        //todo
         StringBuilder stringBuilder = new StringBuilder();
-        while (answer.size() < 4) {
-            Integer ans = (int) (Math.random() * 10);
-            if (!answer.contains(ans)) {
-                stringBuilder.append(ans);
+        //todo extract 4
+        while (answers.size() < 4) {
+            Integer answer = (int) (Math.random() * 10);
+            if (!answers.contains(answer)) {
+                stringBuilder.append(answer);
             }
-            answer.add(ans);
+            answers.add(answer);
         }
         return stringBuilder.toString();
     }

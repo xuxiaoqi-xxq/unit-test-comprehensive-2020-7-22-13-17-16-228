@@ -43,7 +43,7 @@ public class PlayGuessNumberGameTest {
         when(answerGenerator.generate()).thenReturn("1234");
 
         guessNumberGame = Mockito.mock(GuessNumberGame.class);
-        // mock
+        //todo
         Field guessNumberGameField = playGuessNumberGame.getClass().getDeclaredField("guessNumberGame");
         guessNumberGameField.setAccessible(true);
         guessNumberGameField.set(playGuessNumberGame, guessNumberGame);

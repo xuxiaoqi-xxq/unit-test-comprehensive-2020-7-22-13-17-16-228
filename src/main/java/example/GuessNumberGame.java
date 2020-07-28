@@ -2,7 +2,7 @@ package example;
 
 public class GuessNumberGame {
 
-    private String answer;
+    private final String answer;
 
     public GuessNumberGame(String answer) {
         this.answer = answer;

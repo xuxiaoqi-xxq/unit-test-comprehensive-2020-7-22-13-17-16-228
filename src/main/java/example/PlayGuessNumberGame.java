@@ -6,16 +6,14 @@ import java.io.InputStreamReader;
 
 public class PlayGuessNumberGame {
 
-    private GuessNumberValidator guessNumberValidator;
+    private final GuessNumberValidator guessNumberValidator;
 
-    private GuessNumberGame guessNumberGame;
-
-    private GuessNumberAnswerGenerator generateAnswer;
+    private final GuessNumberGame guessNumberGame;
 
     public PlayGuessNumberGame() {
 
         guessNumberValidator = new GuessNumberValidator();
-        generateAnswer = new GuessNumberAnswerGenerator();
+        GuessNumberAnswerGenerator generateAnswer = new GuessNumberAnswerGenerator();
         guessNumberGame = new GuessNumberGame(generateAnswer.generate());
     }
 
@@ -23,15 +21,19 @@ public class PlayGuessNumberGame {
         try {
             int playTimes = 0;
             BufferedReader guessNumberReader = new BufferedReader(new InputStreamReader(System.in));
-            String guessResult = "";
-            String guessNumber = "";
+            String guessResult;
+            String guessNumber;
+            //todo
             while (playTimes++ < 6 && (guessNumber = guessNumberReader.readLine()) != null) {
                 if (guessNumberValidator.isValid(guessNumber)) {
                     guessResult = guessNumberGame.guess(guessNumber);
                 } else {
+                    //todo
                     guessResult = "wrong input, input again";
                 }
+                //todo
                 System.out.print(guessResult + "\n");
+                //todo
                 if (guessResult.equals("4A0B")) {
                     break;
                 }
